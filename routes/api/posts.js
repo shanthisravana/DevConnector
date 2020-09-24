@@ -53,7 +53,9 @@ router.post(
       user: req.user.id,
     });
 
-    newPost.save().then((post) => res.json(post));
+    newPost.save()
+      .then((post) => res.json(post))
+      .catch((err) => console.log(err));
   }
 );
 
