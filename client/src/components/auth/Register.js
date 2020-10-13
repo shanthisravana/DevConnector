@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import classnames from 'classnames';
 import {registerUser} from '../../actions/authActions';
@@ -37,9 +38,15 @@ class Register extends Component {
     
   }
 
+  componentWillReceiveProps(nextProps){
+    if (nextProps.erros){
+      this.setState({errors: nextProps.errors});
+    }
+  }
+
   render() {
 
-    const {errors} = this.props;
+    const {errors} = this.state;
 
     return (
       <div className="register">
@@ -126,6 +133,11 @@ class Register extends Component {
     );
   }
 }
+
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => (
   {
